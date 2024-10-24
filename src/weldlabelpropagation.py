@@ -22,7 +22,10 @@ class WeldLabelPropagation:
         """
         TODO
         """
-        for col_name in Y.columns:
+        cols = Y.columns
+        Y = Y.copy()
+        print(cols)
+        for col_name in cols:
             bin_col_name = 'Passed ' + col_name
             threshold = self.thresholds[col_name][dict_dict_first_key(self.thresholds, col_name)]
             Y[bin_col_name] = self._binarize(Y[col_name], threshold)   
@@ -62,4 +65,3 @@ class WeldLabelPropagation:
         y = np.where(y.isna(), -1, y)
         print(y.shape)
         return y
-
